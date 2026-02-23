@@ -1,0 +1,40 @@
+{
+  "header": {
+    "subtitle": "نارمل، لاہوری اور ملتانی مرلہ کے درمیان تبدیل کریں"
+  },
+  "normalToLahori": "نارمل مرلہ → لاہوری مرلہ",
+  "normalToMultani": "نارمل مرلہ → ملتانی مرلہ",
+  "lahoriToNormal": "لاہوری مرلہ → نارمل مرلہ",
+  "lahoriToMultani": "لاہوری مرلہ → ملتانی مرلہ",
+  "multaniToNormal": "ملتانی مرلہ → نارمل مرلہ",
+  "multaniToLahori": "ملتانی مرلہ → لاہوری مرلہ",
+  "backToCalculator": "کیلکولیٹر پر واپس",
+  "quickLinks": "فوری لنکس",
+  "calculator": {
+    "areaLabel": "رقبہ (مرلہ)",
+    "from": "سے",
+    "to": "کو",
+    "swap": "بدلیں",
+    "convert": "تبدیل کریں",
+    "result": "نتیجہ",
+    "equivalentArea": "برابر رقبہ",
+    "desiMarlaCalculator": "دیسی مرلہ کیلکولیٹر",
+    "pleaseEnterValid": "براہ کرم ایک درست عدد درج کریں۔",
+    "pleaseEnterNonNegative": "براہ کرم ایک غیر منفی عدد درج کریں۔",
+    "conversionFailed": "تبدیل نہیں ہو سکی۔"
+  },
+  "marla": {
+    "normal": "نارمل مرلہ",
+    "lahori": "لاہوری مرلہ",
+    "multani": "ملتانی مرلہ"
+  },
+  "reference": {
+    "title": "حوالہ (1 مرلہ = sq ft)"
+  },
+  "footer": "پاکستان زمین کا رقبہ کیلکولیٹر · مربع فٹ پر مبنی",
+  "sqFt": "مربع فٹ",
+  "language": "زبان",
+  "theme": "تھیم",
+  "light": "روشن",
+  "dark": "اندھیرا"
+}

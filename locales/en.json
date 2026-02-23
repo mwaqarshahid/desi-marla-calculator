@@ -1,0 +1,40 @@
+{
+  "header": {
+    "subtitle": "Convert between Normal, Lahori & Multani Marla"
+  },
+  "normalToLahori": "Normal Marla → Lahori Marla",
+  "normalToMultani": "Normal Marla → Multani Marla",
+  "lahoriToNormal": "Lahori Marla → Normal Marla",
+  "lahoriToMultani": "Lahori Marla → Multani Marla",
+  "multaniToNormal": "Multani Marla → Normal Marla",
+  "multaniToLahori": "Multani Marla → Lahori Marla",
+  "backToCalculator": "Back to calculator",
+  "quickLinks": "Quick links",
+  "calculator": {
+    "areaLabel": "Area (Marla)",
+    "from": "From",
+    "to": "To",
+    "swap": "Swap",
+    "convert": "Convert",
+    "result": "Result",
+    "equivalentArea": "Equivalent area",
+    "desiMarlaCalculator": "Desi Marla Calculator",
+    "pleaseEnterValid": "Please enter a valid number.",
+    "pleaseEnterNonNegative": "Please enter a non-negative number.",
+    "conversionFailed": "Conversion failed."
+  },
+  "marla": {
+    "normal": "Normal Marla",
+    "lahori": "Lahori Marla",
+    "multani": "Multani Marla"
+  },
+  "reference": {
+    "title": "Reference (1 Marla = sq ft)"
+  },
+  "footer": "Pakistan land area calculator · Square feet base",
+  "sqFt": "sq ft",
+  "language": "Language",
+  "theme": "Theme",
+  "light": "Light",
+  "dark": "Dark"
+}

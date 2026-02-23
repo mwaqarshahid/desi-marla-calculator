@@ -1,0 +1,48 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --soil-50: #f7f5f0;
+  --soil-100: #ebe6da;
+  --soil-200: #d9cfb8;
+  --soil-700: #80664b;
+  --soil-800: #695442;
+  --soil-950: #2e241c;
+  --accent: #0d9488;
+  --accent-light: #14b8a6;
+  --accent-dark: #0f766e;
+}
+
+body {
+  background-color: #f7f5f0;
+  color: #2e241c;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  @apply bg-soil-50 dark:bg-soil-950 text-soil-950 dark:text-soil-100 antialiased min-h-screen flex flex-col;
+}
+
+.dark body {
+  background-color: #2e241c;
+  color: #ebe6da;
+}
+
+/* Focus ring for accessibility */
+input:focus-visible,
+select:focus-visible,
+button:focus-visible {
+  @apply outline-none ring-2 ring-accent ring-offset-2 ring-offset-soil-50 dark:ring-offset-soil-900;
+}
+
+/* Remove number input spinners for cleaner look */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="number"] {
+  -moz-appearance: textfield;
+}
