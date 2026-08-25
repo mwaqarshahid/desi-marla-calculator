@@ -31,7 +31,6 @@ export default function Header({ subtitleKey }: HeaderProps) {
   const selectMode = (next: CalculatorTab) => {
     setTab(next);
     setMenuOpen(false);
-    document.getElementById("dmc-calculator")?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
   useEffect(() => {
