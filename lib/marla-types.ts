@@ -2,6 +2,8 @@
  * Marla-related types and re-exports from constants.
  */
 
+import type { MarlaType } from "./constants";
+
 export {
   MARLA_SQ_FT,
   MARLA_LABELS,
@@ -12,13 +14,23 @@ export {
 export interface ConversionResult {
   convertedValue: number;
   squareFeet: number;
-  sourceType: import("./constants").MarlaType;
-  targetType: import("./constants").MarlaType;
+  sourceType: MarlaType;
+  targetType: MarlaType;
   inputValue: number;
 }
 
 export interface ConversionInput {
   value: number;
-  sourceType: import("./constants").MarlaType;
-  targetType: import("./constants").MarlaType;
+  sourceType: MarlaType;
+  targetType: MarlaType;
+}
+
+/** Linked live-converter units: all three marla types plus square feet. */
+export type AreaUnit = MarlaType | "sqFt";
+
+export interface LinkedAreaValues {
+  normal: number;
+  lahori: number;
+  multani: number;
+  sqFt: number;
 }

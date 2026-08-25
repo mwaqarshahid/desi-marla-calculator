@@ -8,7 +8,7 @@ test.describe("Calculator", () => {
   test("home page loads with calculator visible", async ({ page }) => {
     await expect(page.getByRole("article", { name: /marla conversion calculator/i })).toBeVisible();
     await expect(page.getByLabel(/area.*marla/i)).toBeVisible();
-    await expect(page.getByRole("button", { name: /convert/i })).toBeVisible();
+    await expect(page.getByRole("button", { name: "Convert", exact: true })).toBeVisible();
   });
 
   test("Enter key triggers conversion", async ({ page }) => {
@@ -31,13 +31,13 @@ test.describe("Calculator", () => {
   });
 
   test("shows error for empty input", async ({ page }) => {
-    await page.getByRole("button", { name: /convert/i }).click();
+    await page.getByRole("button", { name: "Convert", exact: true }).click();
     await expect(page.getByText(/please enter a valid number/i)).toBeVisible();
   });
 
   test("shows error for negative input", async ({ page }) => {
     await page.getByLabel(/area.*marla/i).fill("-5");
-    await page.getByRole("button", { name: /convert/i }).click();
+    await page.getByRole("button", { name: "Convert", exact: true }).click();
     await expect(page.getByText(/non-negative number/i)).toBeVisible();
   });
 

@@ -3,20 +3,20 @@
 @tailwind utilities;
 
 :root {
-  --soil-50: #f7f5f0;
-  --soil-100: #ebe6da;
-  --soil-200: #d9cfb8;
-  --soil-700: #80664b;
-  --soil-800: #695442;
-  --soil-950: #2e241c;
-  --accent: #0d9488;
-  --accent-light: #14b8a6;
-  --accent-dark: #0f766e;
+  --soil-50: #f8fafc;
+  --soil-100: #f1f5f9;
+  --soil-200: #e2e8f0;
+  --soil-700: #334155;
+  --soil-800: #1e293b;
+  --soil-950: #020617;
+  --accent: #0e9f82;
+  --accent-light: #3ee0c0;
+  --accent-dark: #0a7a64;
 }
 
 body {
-  background-color: #f7f5f0;
-  color: #2e241c;
+  background-color: #f8fafc;
+  color: #0f172a;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   min-height: 100vh;
@@ -26,15 +26,21 @@ body {
 }
 
 .dark body {
-  background-color: #2e241c;
-  color: #ebe6da;
+  background-color: #020617;
+  color: #f1f5f9;
+  background-image: radial-gradient(
+    ellipse 80% 50% at 50% -10%,
+    rgba(14, 159, 130, 0.16),
+    transparent 55%
+  );
 }
 
 /* Focus ring for accessibility */
 input:focus-visible,
 select:focus-visible,
-button:focus-visible {
-  @apply outline-none ring-2 ring-accent ring-offset-2 ring-offset-soil-50 dark:ring-offset-soil-900;
+button:focus-visible,
+a:focus-visible {
+  @apply outline-none ring-2 ring-accent ring-offset-2 ring-offset-soil-50 dark:ring-accent-light dark:ring-offset-soil-950;
 }
 
 /* Remove number input spinners for cleaner look */
@@ -45,4 +51,22 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 input[type="number"] {
   -moz-appearance: textfield;
+}
+
+select {
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23475569' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.5rem center;
+  background-size: 1.25rem;
+  padding-right: 2.5rem;
+}
+
+.dark select {
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+}
+
+[dir="rtl"] select {
+  background-position: left 0.5rem center;
+  padding-right: 1rem;
+  padding-left: 2.5rem;
 }

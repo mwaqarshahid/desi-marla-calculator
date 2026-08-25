@@ -18,11 +18,16 @@
     "convert": "Convert",
     "result": "Result",
     "equivalentArea": "Equivalent area",
-    "desiMarlaCalculator": "Desi Marla Calculator",
     "pleaseEnterValid": "Please enter a valid number.",
     "pleaseEnterNonNegative": "Please enter a non-negative number.",
-    "conversionFailed": "Conversion failed."
+    "conversionFailed": "Conversion failed.",
+    "tabMarla": "Marla Converter",
+    "tabSqFt": "Marla to Square Feet",
+    "liveConvertHint": "Enter any value — the rest update automatically.",
+    "squareFeetLabel": "Square Feet"
   },
+  "openSqFtConverter": "Live converter",
+  "marlaConversions": "Marla conversions",
   "marla": {
     "normal": "Normal Marla",
     "lahori": "Lahori Marla",

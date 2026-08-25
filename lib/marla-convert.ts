@@ -3,7 +3,12 @@ import {
   DECIMAL_PLACES,
   type MarlaType,
 } from "./constants";
-import type { ConversionResult, ConversionInput } from "./marla-types";
+import type {
+  ConversionResult,
+  ConversionInput,
+  AreaUnit,
+  LinkedAreaValues,
+} from "./marla-types";
 import { roundToDecimals } from "./utils";
 
 /**
@@ -50,4 +55,26 @@ export function convertMarla(input: ConversionInput): ConversionResult {
  */
 export function getSqFtPerMarla(type: MarlaType): number {
   return MARLA_SQ_FT[type];
+}
+
+/**
+ * Converts a value in any marla type or square feet into all four linked units.
+ * Square feet is the shared base: marla = squareFeet ÷ sqFtPerMarla.
+ */
+export function convertFromAreaUnit(
+  value: number,
+  unit: AreaUnit
+): LinkedAreaValues {
+  if (!isValidMarlaInput(value)) {
+    throw new Error("Invalid input: value must be a non-negative number.");
+  }
+
+  const squareFeet = unit === "sqFt" ? value : value * MARLA_SQ_FT[unit];
+
+  return {
+    sqFt: roundToDecimals(squareFeet, DECIMAL_PLACES),
+    normal: roundToDecimals(squareFeet / MARLA_SQ_FT.normal, DECIMAL_PLACES),
+    lahori: roundToDecimals(squareFeet / MARLA_SQ_FT.lahori, DECIMAL_PLACES),
+    multani: roundToDecimals(squareFeet / MARLA_SQ_FT.multani, DECIMAL_PLACES),
+  };
 }

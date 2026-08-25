@@ -3,6 +3,7 @@ import { Playfair_Display, DM_Sans } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { LanguageProvider } from "@/components/LanguageProvider";
+import { CalculatorTabProvider } from "@/components/CalculatorTabProvider";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -49,7 +50,10 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#2e241c",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#f8fafc" },
+    { media: "(prefers-color-scheme: dark)", color: "#020617" },
+  ],
 };
 
 export default function RootLayout({
@@ -58,11 +62,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${playfair.variable} ${dmSans.variable}`}>
-      <body className="font-sans min-h-screen flex flex-col bg-soil-50 dark:bg-soil-950 text-soil-950 dark:text-soil-100 antialiased">
+    <html lang="en" className={`${playfair.variable} ${dmSans.variable}`} suppressHydrationWarning>
+      <body
+        className="font-sans min-h-screen flex flex-col bg-soil-50 dark:bg-soil-950 text-soil-950 dark:text-soil-100 antialiased"
+        suppressHydrationWarning
+      >
         <ThemeProvider>
           <LanguageProvider>
-            {children}
+            <CalculatorTabProvider>
+              {children}
+            </CalculatorTabProvider>
           </LanguageProvider>
         </ThemeProvider>
       </body>

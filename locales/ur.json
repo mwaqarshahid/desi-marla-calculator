@@ -18,11 +18,16 @@
     "convert": "تبدیل کریں",
     "result": "نتیجہ",
     "equivalentArea": "برابر رقبہ",
-    "desiMarlaCalculator": "دیسی مرلہ کیلکولیٹر",
     "pleaseEnterValid": "براہ کرم ایک درست عدد درج کریں۔",
     "pleaseEnterNonNegative": "براہ کرم ایک غیر منفی عدد درج کریں۔",
-    "conversionFailed": "تبدیل نہیں ہو سکی۔"
+    "conversionFailed": "تبدیل نہیں ہو سکی۔",
+    "tabMarla": "مرلہ کیلکولیٹر",
+    "tabSqFt": "مرلہ سے مربع فٹ",
+    "liveConvertHint": "کوئی بھی قیمت درج کریں — باقی خود تبدیل ہو جائیں گے۔",
+    "squareFeetLabel": "مربع فٹ"
   },
+  "openSqFtConverter": "لائیو کنورٹر",
+  "marlaConversions": "مرلہ تبدیلیاں",
   "marla": {
     "normal": "نارمل مرلہ",
     "lahori": "لاہوری مرلہ",

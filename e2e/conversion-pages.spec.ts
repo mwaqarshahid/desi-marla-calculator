@@ -10,7 +10,7 @@ test.describe("Calculator on conversion page", () => {
   test("conversion then result on dedicated page", async ({ page }) => {
     await page.goto("/lahori-to-normal");
     await page.getByLabel(/area.*marla/i).fill("4");
-    await page.getByRole("button", { name: /convert/i }).click();
+    await page.getByRole("button", { name: "Convert", exact: true }).click();
     // 4 Lahori = 900 sq ft => 900 / 272.25 = 3.3058 Normal
     await expect(page.getByText(/3\.3058.*Normal Marla/i)).toBeVisible();
   });

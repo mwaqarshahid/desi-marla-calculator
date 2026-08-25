@@ -11,28 +11,22 @@ const config: Config = {
     extend: {
       colors: {
         soil: {
-          50: "#f7f5f0",
-          100: "#ebe6da",
-          200: "#d9cfb8",
-          300: "#c4b392",
-          400: "#b39a72",
-          500: "#a68a64",
-          600: "#9a7d59",
-          700: "#80664b",
-          800: "#695442",
-          900: "#574639",
-          950: "#2e241c",
+          50: "#f8fafc",
+          100: "#f1f5f9",
+          200: "#e2e8f0",
+          300: "#cbd5e1",
+          400: "#94a3b8",
+          500: "#64748b",
+          600: "#475569",
+          700: "#334155",
+          800: "#1e293b",
+          900: "#0f172a",
+          950: "#020617",
         },
         accent: {
-          DEFAULT: "#0d9488",
-          light: "#14b8a6",
-          dark: "#0f766e",
-        },
-        heritage: {
-          gold: "#c9a227",
-          copper: "#b87333",
-          terracotta: "#c85a3a",
-          earth: "#8b6914",
+          DEFAULT: "#0e9f82",
+          light: "#3ee0c0",
+          dark: "#0a7a64",
         },
       },
       fontFamily: {
@@ -54,9 +48,11 @@ const config: Config = {
         },
       },
       boxShadow: {
-        card: "0 4px 24px -4px rgba(46, 36, 28, 0.12), 0 8px 48px -8px rgba(46, 36, 28, 0.08)",
+        card: "0 4px 24px -4px rgba(15, 23, 42, 0.08), 0 8px 40px -8px rgba(15, 23, 42, 0.06)",
         "card-hover":
-          "0 12px 40px -8px rgba(46, 36, 28, 0.16), 0 24px 64px -16px rgba(46, 36, 28, 0.12)",
+          "0 12px 40px -8px rgba(15, 23, 42, 0.12), 0 24px 64px -16px rgba(15, 23, 42, 0.08)",
+        "card-dark":
+          "0 0 0 1px rgba(255, 255, 255, 0.06), 0 16px 48px -12px rgba(0, 0, 0, 0.55)",
       },
     },
   },
