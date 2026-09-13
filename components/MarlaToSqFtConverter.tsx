@@ -1,136 +1,182 @@
 "use client";
 
-import { useState } from "react";
-import { MARLA_SQ_FT, DECIMAL_PLACES, type MarlaType } from "@/lib/constants";
-import type { AreaUnit } from "@/lib/marla-types";
-import { convertFromAreaUnit, isValidMarlaInput } from "@/lib/marla-convert";
+import { useState, useCallback } from "react";
+import { ArrowRightLeft, MapPin } from "lucide-react";
+import { MARLA_OPTIONS, type AreaUnit } from "@/lib/marla-types";
+import { convertArea, isValidMarlaInput } from "@/lib/marla-convert";
+import type { AreaConversionResult } from "@/lib/marla-types";
 import { useLanguage } from "@/components/LanguageProvider";
 
-const EMPTY_VALUES: Record<AreaUnit, string> = {
-  normal: "",
-  lahori: "",
-  multani: "",
-  sqFt: "",
-};
-
-const MARLA_FIELDS: MarlaType[] = ["normal", "lahori", "multani"];
-
-const inputClass =
-  "w-full px-4 py-3 rounded-xl border bg-white dark:bg-soil-950 text-soil-950 dark:text-soil-100 placeholder:text-soil-400 dark:placeholder:text-soil-500 focus:border-accent dark:focus:border-accent-light transition-colors";
+const fieldClass =
+  "w-full px-4 py-3 rounded-xl border border-soil-200 dark:border-white/10 bg-white dark:bg-soil-950 text-soil-950 dark:text-soil-100 placeholder:text-soil-400 dark:placeholder:text-soil-500 focus:border-accent dark:focus:border-accent-light transition-colors appearance-none cursor-pointer";
 
 export default function MarlaToSqFtConverter() {
   const { t } = useLanguage();
-  const [values, setValues] = useState<Record<AreaUnit, string>>(EMPTY_VALUES);
-  const [edited, setEdited] = useState<AreaUnit | null>(null);
+  const [inputValue, setInputValue] = useState<string>("");
+  const [sourceUnit, setSourceUnit] = useState<AreaUnit>("normal");
+  const [targetUnit, setTargetUnit] = useState<AreaUnit>("sqFt");
+  const [result, setResult] = useState<AreaConversionResult | null>(null);
   const [error, setError] = useState<string | null>(null);
 
-  const handleChange = (unit: AreaUnit, raw: string) => {
-    setEdited(unit);
+  const unitLabel = (unit: AreaUnit) =>
+    unit === "sqFt" ? t("calculator.squareFeetLabel") : t(`marla.${unit}`);
 
-    if (raw.trim() === "") {
-      setValues(EMPTY_VALUES);
-      setError(null);
-      return;
-    }
+  const handleConvert = useCallback(() => {
+    setError(null);
+    setResult(null);
 
-    const num = parseFloat(raw.replace(/,/g, "."));
-    if (Number.isNaN(num)) {
-      setValues((prev) => ({ ...prev, [unit]: raw }));
+    const num = parseFloat(inputValue.replace(/,/g, "."));
+    if (inputValue.trim() === "" || Number.isNaN(num)) {
       setError(t("calculator.pleaseEnterValid"));
       return;
     }
     if (!isValidMarlaInput(num)) {
-      setValues((prev) => ({ ...prev, [unit]: raw }));
       setError(t("calculator.pleaseEnterNonNegative"));
       return;
     }
 
     try {
-      const converted = convertFromAreaUnit(num, unit);
-      setValues({
-        normal: unit === "normal" ? raw : converted.normal.toFixed(DECIMAL_PLACES),
-        lahori: unit === "lahori" ? raw : converted.lahori.toFixed(DECIMAL_PLACES),
-        multani: unit === "multani" ? raw : converted.multani.toFixed(DECIMAL_PLACES),
-        sqFt: unit === "sqFt" ? raw : converted.sqFt.toFixed(DECIMAL_PLACES),
-      });
-      setError(null);
+      setResult(convertArea(num, sourceUnit, targetUnit));
     } catch {
       setError(t("calculator.conversionFailed"));
     }
+  }, [inputValue, sourceUnit, targetUnit, t]);
+
+  const handleSwap = useCallback(() => {
+    setSourceUnit(targetUnit);
+    setTargetUnit(sourceUnit);
+    setResult(null);
+    setError(null);
+  }, [sourceUnit, targetUnit]);
+
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === "Enter") handleConvert();
   };
 
-  const fieldClass = (unit: AreaUnit, featured = false) =>
-    `${inputClass} ${
-      edited === unit
-        ? "border-accent dark:border-accent-light"
-        : featured
-          ? "border-accent/30 dark:border-accent-light/30"
-          : "border-soil-200 dark:border-white/10"
-    }`;
+  const units: AreaUnit[] = [...MARLA_OPTIONS.map((opt) => opt.value), "sqFt"];
 
   return (
-    <div className="space-y-4">
-      <p className="text-sm text-soil-600 dark:text-soil-300">
-        {t("calculator.liveConvertHint")}
-      </p>
-
-      <div className="space-y-4">
-        {MARLA_FIELDS.map((type) => (
-          <div key={type}>
-            <label
-              htmlFor={`area-${type}`}
-              className="block text-sm font-medium text-soil-700 dark:text-soil-200 mb-1"
-            >
-              {t(`marla.${type}`)}
-            </label>
-            <p className="text-xs text-soil-500 dark:text-soil-400 mb-2">
-              1 {t(`marla.${type}`)} = {MARLA_SQ_FT[type]} {t("sqFt")}
-            </p>
-            <input
-              id={`area-${type}`}
-              type="number"
-              inputMode="decimal"
-              min="0"
-              step="any"
-              placeholder="0"
-              value={values[type]}
-              onChange={(e) => handleChange(type, e.target.value)}
-              className={fieldClass(type)}
-              aria-describedby={error ? "sqft-input-error" : undefined}
-            />
-          </div>
-        ))}
-      </div>
-
-      <div className="rounded-xl bg-accent/5 dark:bg-accent/10 border border-accent/20 dark:border-accent-light/20 p-4">
+    <div className="space-y-5">
+      <div>
         <label
-          htmlFor="area-sqft"
-          className="block text-sm font-semibold text-accent dark:text-accent-light mb-2"
+          htmlFor="sqft-area-input"
+          className="block text-sm font-medium text-soil-700 dark:text-soil-300 mb-2"
         >
-          {t("calculator.squareFeetLabel")}
+          {t("calculator.areaLabelAny")}
         </label>
         <input
-          id="area-sqft"
+          id="sqft-area-input"
           type="number"
           inputMode="decimal"
           min="0"
           step="any"
-          placeholder="0"
-          value={values.sqFt}
-          onChange={(e) => handleChange("sqFt", e.target.value)}
-          className={fieldClass("sqFt", true)}
+          placeholder="e.g. 5"
+          value={inputValue}
+          onChange={(e) => {
+            setInputValue(e.target.value);
+            setResult(null);
+            setError(null);
+          }}
+          onKeyDown={handleKeyDown}
+          className={`${fieldClass} cursor-text`}
           aria-describedby={error ? "sqft-input-error" : undefined}
         />
+        {error && (
+          <p id="sqft-input-error" className="mt-1.5 text-sm text-rose-600 dark:text-rose-400" role="alert">
+            {error}
+          </p>
+        )}
       </div>
 
-      {error && (
-        <p
-          id="sqft-input-error"
-          className="text-sm text-rose-600 dark:text-rose-400"
-          role="alert"
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div>
+          <label
+            htmlFor="source-sqft"
+            className="block text-sm font-medium text-soil-700 dark:text-soil-300 mb-2"
+          >
+            {t("calculator.from")}
+          </label>
+          <select
+            id="source-sqft"
+            value={sourceUnit}
+            onChange={(e) => {
+              setSourceUnit(e.target.value as AreaUnit);
+              setResult(null);
+              setError(null);
+            }}
+            className={fieldClass}
+          >
+            {units.map((unit) => (
+              <option key={unit} value={unit}>
+                {unitLabel(unit)}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div>
+          <label
+            htmlFor="target-sqft"
+            className="block text-sm font-medium text-soil-700 dark:text-soil-300 mb-2"
+          >
+            {t("calculator.to")}
+          </label>
+          <select
+            id="target-sqft"
+            value={targetUnit}
+            onChange={(e) => {
+              setTargetUnit(e.target.value as AreaUnit);
+              setResult(null);
+              setError(null);
+            }}
+            className={fieldClass}
+          >
+            {units.map((unit) => (
+              <option key={unit} value={unit}>
+                {unitLabel(unit)}
+              </option>
+            ))}
+          </select>
+        </div>
+      </div>
+
+      <div className="flex justify-center">
+        <button
+          type="button"
+          onClick={handleSwap}
+          className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-soil-600 dark:text-soil-300 hover:bg-soil-100 dark:hover:bg-soil-800 hover:text-soil-950 dark:hover:text-white transition-colors"
+          aria-label="Swap source and target units"
         >
-          {error}
-        </p>
+          <ArrowRightLeft className="h-4 w-4" />
+          <span className="text-sm font-medium">{t("calculator.swap")}</span>
+        </button>
+      </div>
+
+      <button
+        type="button"
+        onClick={handleConvert}
+        className="w-full py-3.5 rounded-xl font-semibold bg-accent hover:bg-accent-dark dark:bg-accent dark:hover:bg-accent-light dark:hover:text-soil-950 text-white transition-all duration-200 shadow-md hover:shadow-lg active:scale-[0.99]"
+      >
+        {t("calculator.convert")}
+      </button>
+
+      {result && (
+        <section
+          className="rounded-xl bg-accent/5 dark:bg-accent/10 border border-accent/20 dark:border-accent-light/20 p-4 animate-slide-up"
+          aria-live="polite"
+        >
+          <div className="flex items-center gap-2 text-soil-600 dark:text-soil-300 mb-3">
+            <MapPin className="h-4 w-4 text-accent dark:text-accent-light" aria-hidden />
+            <span className="text-sm font-medium">{t("calculator.result")}</span>
+          </div>
+          <p className="text-lg font-sans font-semibold text-soil-950 dark:text-white">
+            {result.inputValue} {unitLabel(result.sourceUnit)} = {result.convertedValue.toFixed(4)} {unitLabel(result.targetUnit)}
+          </p>
+          {result.targetUnit !== "sqFt" && (
+            <p className="mt-2 text-soil-600 dark:text-soil-300">
+              {t("calculator.equivalentArea")}: {result.squareFeet.toLocaleString(undefined, { maximumFractionDigits: 4 })} {t("sqFt")}
+            </p>
+          )}
+        </section>
       )}
     </div>
   );

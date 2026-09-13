@@ -15,7 +15,7 @@ const translations: Record<Locale, Record<string, unknown>> = {
 };
 
 /**
- * Get a nested value from an object by dot-separated path (e.g. "header.subtitle").
+ * Get a nested value from an object by dot-separated path (e.g. "intro.tagline").
  */
 export function getNested(
   obj: Record<string, unknown>,

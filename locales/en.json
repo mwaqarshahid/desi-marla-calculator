@@ -1,17 +1,10 @@
 {
-  "header": {
-    "subtitle": "Convert between Normal, Lahori & Multani Marla"
+  "intro": {
+    "tagline": "Convert between Standard, Lahori & Multani Marla"
   },
-  "normalToLahori": "Normal Marla → Lahori Marla",
-  "normalToMultani": "Normal Marla → Multani Marla",
-  "lahoriToNormal": "Lahori Marla → Normal Marla",
-  "lahoriToMultani": "Lahori Marla → Multani Marla",
-  "multaniToNormal": "Multani Marla → Normal Marla",
-  "multaniToLahori": "Multani Marla → Lahori Marla",
-  "backToCalculator": "Back to calculator",
-  "quickLinks": "Quick links",
   "calculator": {
     "areaLabel": "Area (Marla)",
+    "areaLabelAny": "Area",
     "from": "From",
     "to": "To",
     "swap": "Swap",
@@ -23,13 +16,10 @@
     "conversionFailed": "Conversion failed.",
     "tabMarla": "Marla Converter",
     "tabSqFt": "Marla to Square Feet",
-    "liveConvertHint": "Enter any value — the rest update automatically.",
     "squareFeetLabel": "Square Feet"
   },
-  "openSqFtConverter": "Live converter",
-  "marlaConversions": "Marla conversions",
   "marla": {
-    "normal": "Normal Marla",
+    "normal": "Standard Marla",
     "lahori": "Lahori Marla",
     "multani": "Multani Marla"
   },

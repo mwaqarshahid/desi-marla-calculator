@@ -25,12 +25,13 @@ export interface ConversionInput {
   targetType: MarlaType;
 }
 
-/** Linked live-converter units: all three marla types plus square feet. */
+/** Marla types plus square feet, used by the Marla to Square Feet tab. */
 export type AreaUnit = MarlaType | "sqFt";
 
-export interface LinkedAreaValues {
-  normal: number;
-  lahori: number;
-  multani: number;
-  sqFt: number;
+export interface AreaConversionResult {
+  inputValue: number;
+  sourceUnit: AreaUnit;
+  targetUnit: AreaUnit;
+  squareFeet: number;
+  convertedValue: number;
 }

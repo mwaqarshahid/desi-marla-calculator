@@ -1,8 +1,8 @@
 # DMC – Desi Marla Calculator
 
-A production-ready web app to convert land area between Pakistan’s regional marla definitions: **Normal**, **Lahori** and **Multani** Marla.
+A production-ready web app to convert land area between Pakistan’s regional marla definitions: **Standard**, **Lahori** and **Multani** Marla.
 
-- **Normal Marla** = 272.25 sq ft
+- **Standard Marla** = 272.25 sq ft
 - **Lahori Marla** = 225 sq ft
 - **Multani Marla** = 270 sq ft
 
@@ -10,7 +10,8 @@ All conversions use **square feet** as the base unit.
 
 ## Features
 
-- **Marla conversion** – Convert between Normal, Lahori and Multani Marla; all six conversion directions with square feet as base; results to 4 decimal places.
+- **Marla Converter** – Convert between Standard, Lahori and Multani Marla using square feet as the base; results to 4 decimal places.
+- **Marla to Square Feet** – Convert any marla type to square feet, and back.
 - **Dark mode** – Toggle light/dark theme (persists in localStorage).
 - **Multi-language (Urdu + English)** – Switch language from the header; RTL layout for Urdu.
 
@@ -72,10 +73,10 @@ Production URL will be like: `https://your-project.vercel.app`.
 
 ## Project Structure
 
-- `app/` – App Router pages and layout (SSG)
-- `components/` – CalculatorCard, Logo, MarlaReference
-- `lib/` – `marla-types.ts`, `marla-convert.ts` (conversion logic)
-- Optional conversion pages: `/normal-to-lahori`, `/lahori-to-normal`, etc.
+- `app/` – Home page and layout
+- `components/` – Header, calculator, reference table, and providers
+- `lib/` – Marla types and conversion logic
+- `locales/` – English and Urdu strings
 
 ## Future Expansion
 

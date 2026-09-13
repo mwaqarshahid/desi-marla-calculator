@@ -1,15 +1,15 @@
 import { test, expect } from "@playwright/test";
 
 test.describe("Navigation", () => {
-  test("quick link navigates to conversion page", async ({ page }) => {
+  test("logo links to home", async ({ page }) => {
     await page.goto("/");
-    await page.getByRole("link", { name: "Normal Marla → Lahori Marla" }).click();
-    await expect(page).toHaveURL(/\/normal-to-lahori/);
+    await page.getByRole("link", { name: /desi marla calculator/i }).click();
+    await expect(page).toHaveURL("/");
   });
 
-  test("logo links to home", async ({ page }) => {
-    await page.goto("/normal-to-multani");
-    await page.getByRole("link", { name: /DMC.*home|Go to home/i }).click();
+  test("old conversion URLs redirect home", async ({ page }) => {
+    await page.goto("/normal-to-lahori");
     await expect(page).toHaveURL("/");
+    await expect(page.getByRole("article", { name: /marla conversion calculator/i })).toBeVisible();
   });
 });

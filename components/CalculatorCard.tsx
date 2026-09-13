@@ -9,23 +9,15 @@ import { useLanguage } from "@/components/LanguageProvider";
 import MarlaToSqFtConverter from "@/components/MarlaToSqFtConverter";
 import { useCalculatorTab } from "@/components/CalculatorTabProvider";
 
-interface CalculatorCardProps {
-  defaultSource?: MarlaType;
-  defaultTarget?: MarlaType;
-}
-
 const fieldClass =
   "w-full px-4 py-3 rounded-xl border border-soil-200 dark:border-white/10 bg-white dark:bg-soil-950 text-soil-950 dark:text-soil-100 placeholder:text-soil-400 dark:placeholder:text-soil-500 focus:border-accent dark:focus:border-accent-light transition-colors appearance-none cursor-pointer";
 
-export default function CalculatorCard({
-  defaultSource = "normal",
-  defaultTarget = "lahori",
-}: CalculatorCardProps = {}) {
+export default function CalculatorCard() {
   const { t } = useLanguage();
   const { tab, setTab } = useCalculatorTab();
   const [inputValue, setInputValue] = useState<string>("");
-  const [sourceType, setSourceType] = useState<MarlaType>(defaultSource);
-  const [targetType, setTargetType] = useState<MarlaType>(defaultTarget);
+  const [sourceType, setSourceType] = useState<MarlaType>("normal");
+  const [targetType, setTargetType] = useState<MarlaType>("lahori");
   const [result, setResult] = useState<ConversionResult | null>(null);
   const [error, setError] = useState<string | null>(null);
 

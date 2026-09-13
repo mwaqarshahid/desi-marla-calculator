@@ -4,12 +4,18 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
   async redirects() {
     return [
-      {
-        source: "/marla-to-square-feet",
-        destination: "/",
-        permanent: true,
-      },
-    ];
+      "/marla-to-square-feet",
+      "/normal-to-lahori",
+      "/normal-to-multani",
+      "/lahori-to-normal",
+      "/lahori-to-multani",
+      "/multani-to-normal",
+      "/multani-to-lahori",
+    ].map((source) => ({
+      source,
+      destination: "/",
+      permanent: true,
+    }));
   },
 };
 
