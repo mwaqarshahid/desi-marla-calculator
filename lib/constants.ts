@@ -11,6 +11,9 @@ export const MARLA_SQ_FT = {
 
 export type MarlaType = keyof typeof MARLA_SQ_FT;
 
+/** Square feet in 1 square yard. */
+export const SQ_FT_PER_SQ_YD = 9;
+
 /** Display labels for each marla type. */
 export const MARLA_LABELS: Record<MarlaType, string> = {
   normal: "Standard Marla",

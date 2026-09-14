@@ -8,6 +8,7 @@ export {
   MARLA_SQ_FT,
   MARLA_LABELS,
   MARLA_OPTIONS,
+  SQ_FT_PER_SQ_YD,
   type MarlaType,
 } from "./constants";
 
@@ -25,8 +26,8 @@ export interface ConversionInput {
   targetType: MarlaType;
 }
 
-/** Marla types plus square feet, used by the Marla to Square Feet tab. */
-export type AreaUnit = MarlaType | "sqFt";
+/** Marla types plus square feet and square yards, used by the Marla to Square Feet tab. */
+export type AreaUnit = MarlaType | "sqFt" | "sqYd";
 
 export interface AreaConversionResult {
   inputValue: number;

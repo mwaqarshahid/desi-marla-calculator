@@ -51,6 +51,33 @@ test.describe("Marla to Square Feet tab", () => {
     await expect(page.locator("#source-sqft")).toHaveValue("sqFt");
     await expect(page.locator("#target-sqft")).toHaveValue("multani");
   });
+
+  test("converts Standard Marla to square yards", async ({ page }) => {
+    await page.locator("#sqft-area-input").fill("1");
+    await page.locator("#source-sqft").selectOption("normal");
+    await page.locator("#target-sqft").selectOption("sqYd");
+    await page.getByRole("button", { name: "Convert", exact: true }).click();
+
+    await expect(page.getByText(/1.*Standard Marla.*=.*30\.2500.*Square Yards/i)).toBeVisible();
+  });
+
+  test("converts Lahori Marla to square yards", async ({ page }) => {
+    await page.locator("#sqft-area-input").fill("1");
+    await page.locator("#source-sqft").selectOption("lahori");
+    await page.locator("#target-sqft").selectOption("sqYd");
+    await page.getByRole("button", { name: "Convert", exact: true }).click();
+
+    await expect(page.getByText(/1.*Lahori Marla.*=.*25\.0000.*Square Yards/i)).toBeVisible();
+  });
+
+  test("converts square yards to square feet", async ({ page }) => {
+    await page.locator("#sqft-area-input").fill("1");
+    await page.locator("#source-sqft").selectOption("sqYd");
+    await page.locator("#target-sqft").selectOption("sqFt");
+    await page.getByRole("button", { name: "Convert", exact: true }).click();
+
+    await expect(page.getByText(/1.*Square Yards.*=.*9\.0000.*Square Feet/i)).toBeVisible();
+  });
 });
 
 test.describe("Page intro", () => {

@@ -46,5 +46,6 @@ test.describe("Calculator", () => {
     await expect(page.getByText("272.25")).toBeVisible();
     await expect(page.getByText("225")).toBeVisible();
     await expect(page.getByText("270")).toBeVisible();
+    await expect(page.getByText("30.25")).toBeVisible();
   });
 });

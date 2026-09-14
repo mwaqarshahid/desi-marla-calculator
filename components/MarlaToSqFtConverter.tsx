@@ -2,7 +2,7 @@
 
 import { useState, useCallback } from "react";
 import { ArrowRightLeft, MapPin } from "lucide-react";
-import { MARLA_OPTIONS, type AreaUnit } from "@/lib/marla-types";
+import { MARLA_OPTIONS, SQ_FT_PER_SQ_YD, type AreaUnit } from "@/lib/marla-types";
 import { convertArea, isValidMarlaInput } from "@/lib/marla-convert";
 import type { AreaConversionResult } from "@/lib/marla-types";
 import { useLanguage } from "@/components/LanguageProvider";
@@ -18,8 +18,11 @@ export default function MarlaToSqFtConverter() {
   const [result, setResult] = useState<AreaConversionResult | null>(null);
   const [error, setError] = useState<string | null>(null);
 
-  const unitLabel = (unit: AreaUnit) =>
-    unit === "sqFt" ? t("calculator.squareFeetLabel") : t(`marla.${unit}`);
+  const unitLabel = (unit: AreaUnit) => {
+    if (unit === "sqFt") return t("calculator.squareFeetLabel");
+    if (unit === "sqYd") return t("calculator.squareYardsLabel");
+    return t(`marla.${unit}`);
+  };
 
   const handleConvert = useCallback(() => {
     setError(null);
@@ -53,7 +56,7 @@ export default function MarlaToSqFtConverter() {
     if (e.key === "Enter") handleConvert();
   };
 
-  const units: AreaUnit[] = [...MARLA_OPTIONS.map((opt) => opt.value), "sqFt"];
+  const units: AreaUnit[] = [...MARLA_OPTIONS.map((opt) => opt.value), "sqFt", "sqYd"];
 
   return (
     <div className="space-y-5">
@@ -174,6 +177,11 @@ export default function MarlaToSqFtConverter() {
           {result.targetUnit !== "sqFt" && (
             <p className="mt-2 text-soil-600 dark:text-soil-300">
               {t("calculator.equivalentArea")}: {result.squareFeet.toLocaleString(undefined, { maximumFractionDigits: 4 })} {t("sqFt")}
+            </p>
+          )}
+          {result.targetUnit !== "sqYd" && (
+            <p className="mt-2 text-soil-600 dark:text-soil-300">
+              {t("calculator.equivalentArea")}: {(result.squareFeet / SQ_FT_PER_SQ_YD).toLocaleString(undefined, { maximumFractionDigits: 4 })} {t("sqYd")}
             </p>
           )}
         </section>

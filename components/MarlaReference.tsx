@@ -1,6 +1,6 @@
 "use client";
 
-import { MARLA_SQ_FT } from "@/lib/marla-types";
+import { MARLA_SQ_FT, SQ_FT_PER_SQ_YD } from "@/lib/marla-types";
 import type { MarlaType } from "@/lib/marla-types";
 import { useLanguage } from "@/components/LanguageProvider";
 
@@ -12,6 +12,7 @@ export default function MarlaReference() {
     key,
     label: t(`marla.${key}`),
     sqFt: MARLA_SQ_FT[key],
+    sqYd: MARLA_SQ_FT[key] / SQ_FT_PER_SQ_YD,
   }));
 
   return (
@@ -23,10 +24,12 @@ export default function MarlaReference() {
         {t("reference.title")}
       </h2>
       <ul className="space-y-2 text-sm text-soil-600 dark:text-soil-300">
-        {entries.map(({ key, label, sqFt }) => (
-          <li key={key} className="flex justify-between">
+        {entries.map(({ key, label, sqFt, sqYd }) => (
+          <li key={key} className="flex justify-between gap-3">
             <span>{label}</span>
-            <span className="font-medium text-soil-800 dark:text-white">{sqFt} {t("sqFt")}</span>
+            <span className="font-medium text-soil-800 dark:text-white text-end">
+              {sqFt} {t("sqFt")} · {sqYd} {t("sqYd")}
+            </span>
           </li>
         ))}
       </ul>

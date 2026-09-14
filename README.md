@@ -11,7 +11,7 @@ All conversions use **square feet** as the base unit.
 ## Features
 
 - **Marla Converter** – Convert between Standard, Lahori and Multani Marla using square feet as the base; results to 4 decimal places.
-- **Marla to Square Feet** – Convert any marla type to square feet, and back.
+- **Marla to Square Feet** – Convert any marla type to square feet or square yards, and back.
 - **Dark mode** – Toggle light/dark theme (persists in localStorage).
 - **Multi-language (Urdu + English)** – Switch language from the header; RTL layout for Urdu.
 

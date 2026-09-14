@@ -16,7 +16,8 @@
     "conversionFailed": "Conversion failed.",
     "tabMarla": "Marla Converter",
     "tabSqFt": "Marla to Square Feet",
-    "squareFeetLabel": "Square Feet"
+    "squareFeetLabel": "Square Feet",
+    "squareYardsLabel": "Square Yards"
   },
   "marla": {
     "normal": "Standard Marla",
@@ -24,10 +25,11 @@
     "multani": "Multani Marla"
   },
   "reference": {
-    "title": "Reference (1 Marla = sq ft)"
+    "title": "Reference (1 Marla = sq ft · sq yd)"
   },
-  "footer": "Pakistan land area calculator · Square feet base",
+  "footer": "Pakistan land area calculator · Square feet . Square yards base",
   "sqFt": "sq ft",
+  "sqYd": "sq yd",
   "language": "Language",
   "theme": "Theme",
   "light": "Light",

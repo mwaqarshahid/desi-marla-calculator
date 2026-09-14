@@ -1,6 +1,7 @@
 import {
   MARLA_SQ_FT,
   DECIMAL_PLACES,
+  SQ_FT_PER_SQ_YD,
   type MarlaType,
 } from "./constants";
 import type {
@@ -57,9 +58,21 @@ export function getSqFtPerMarla(type: MarlaType): number {
   return MARLA_SQ_FT[type];
 }
 
+function toSquareFeet(value: number, unit: AreaUnit): number {
+  if (unit === "sqFt") return value;
+  if (unit === "sqYd") return value * SQ_FT_PER_SQ_YD;
+  return value * MARLA_SQ_FT[unit];
+}
+
+function fromSquareFeet(squareFeet: number, unit: AreaUnit): number {
+  if (unit === "sqFt") return squareFeet;
+  if (unit === "sqYd") return squareFeet / SQ_FT_PER_SQ_YD;
+  return squareFeet / MARLA_SQ_FT[unit];
+}
+
 /**
- * Converts between any marla type and square feet (or another marla type).
- * Square feet is the shared base, same formula as convertMarla.
+ * Converts between marla types, square feet, and square yards.
+ * Square feet is the shared base (1 sq yd = 9 sq ft).
  */
 export function convertArea(
   value: number,
@@ -70,13 +83,8 @@ export function convertArea(
     throw new Error("Invalid input: value must be a non-negative number.");
   }
 
-  const squareFeet = sourceUnit === "sqFt" ? value : value * MARLA_SQ_FT[sourceUnit];
-  const convertedValue =
-    targetUnit === sourceUnit
-      ? value
-      : targetUnit === "sqFt"
-        ? squareFeet
-        : squareFeet / MARLA_SQ_FT[targetUnit];
+  const squareFeet = toSquareFeet(value, sourceUnit);
+  const convertedValue = targetUnit === sourceUnit ? value : fromSquareFeet(squareFeet, targetUnit);
 
   return {
     inputValue: value,
